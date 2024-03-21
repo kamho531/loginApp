@@ -1,0 +1,207 @@
+#:kivy 2.0
+
+ScreenManager:
+    LoginScreen:
+    CreateScreen:
+    DetailScreen:
+    
+<LoginScreen>:
+    name: 'login'
+    MDCard:
+        size_hint: None, None
+        size: 350, 600
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 10
+        spacing: 10
+        orientation: "vertical"
+        
+        MDLabel:
+            id: welcome_label
+            text: "Welcome"
+            font_size: 25
+            halign: "center"
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+        
+        
+        MDTextField:
+            id: un
+            hint_text: "email" 
+            icon_right: "account"
+            size_hint_x: None
+            mode: "round"
+            width: 250
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            
+        MDTextField:
+            id: pw
+            hint_text: "password" 
+            icon_right: "eye-off"
+            size_hint_x: None
+            mode: "round"
+            width: 250
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            password: True
+                
+         
+        MDRoundFlatButton:
+            text: "Log in"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press:
+                app.loginBtn()
+
+            
+        MDRoundFlatButton:
+            text: "Clear"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: 
+                app.clear()
+        
+        MDRoundFlatButton:
+            text: "Don't have an account? Create one"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press:
+                root.manager.current = 'create'
+                root.manager.transition.direction = 'right'
+                #app.createBtn()
+                                   
+        Widget:
+            size_hint_y: None
+            height: 100    
+
+            
+<CreateScreen>:
+    name: 'create'
+    MDCard:
+        size_hint: None, None
+        size: 350, 600
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 20
+        spacing: 10
+        orientation: "vertical"
+
+        MDLabel:
+            id: create_acct_label
+            text: "Create an account"
+            font_size: 25
+            halign: "center"
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 10
+
+        MDFloatLayout:                 
+            MDTextField:
+                id: name_txt
+                hint_text: "Enter name here"
+                mode: "rectangle"
+                pos_hint: {"x": 0.001, "y": 0.9}
+            
+            MDTextField:
+                id: email_txt
+                icon_right: "account"
+                hint_text: "Enter email here"
+                helper_text: "Must have a @"
+                helper_text_mode: "on_focus"
+                mode: "rectangle"
+                pos_hint: {"x": 0.001, "y": 0.7}
+                 
+            MDTextField:
+                id: password_txt
+                icon_right: "eye-off"
+                hint_text: "Enter password here"
+                helper_text: "At least 8 characters"
+                helper_text_mode: "on_focus"
+                mode: "rectangle"
+                pos_hint: {"x": 0.001, "y": 0.5}
+                password: True 
+
+
+        MDRoundFlatButton:
+            text: "Submit"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press:
+                app.submit()
+
+
+        MDRoundFlatButton:
+            text: "Already have an account? Log in"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press:
+                root.manager.current = 'login'
+                root.manager.transition.direction = 'left'
+                
+        Widget:
+            size_hint_y: None
+            height: 100  
+
+
+<DetailScreen>:
+    name: 'detail'
+    MDCard:
+        size_hint: None, None
+        size: 350, 600
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 10
+        spacing: 10
+        orientation: "vertical"
+        
+        MDFloatLayout:
+                                
+            MDLabel:
+                id: title_label
+                text: "Your Account Information"
+                font_size: 20
+                pos_hint: {"x": 0.15, "y": 0.8}
+                size_hint_y: None
+                color: [0.45, 0.79, 0.15, 1]
+                height: self.texture_size[1]
+                padding_y: 10
+            
+            MDLabel:
+                id: name_label
+                #text: "Account Name: "
+                font_size: 17
+                pos_hint: {"x": 0.05, "top": 0.7}
+                size_hint_y: None
+                color: [0.41, 0.42, 0.74, 1]
+                height: self.texture_size[1]
+                padding_y: 10
+                
+            MDLabel:
+                id: email_label
+                #text: "Email: "
+                font_size: 17
+                pos_hint: {"x": 0.05, "top": 0.6}
+                size_hint_y: None
+                color: [0.41, 0.42, 0.74, 1]
+                height: self.texture_size[1]
+                padding_y: 10
+                
+            MDLabel:
+                id: created_on_label
+                #text: "Created on: "
+                font_size: 17
+                pos_hint: {"x": 0.05, "top": 0.5}
+                size_hint_y: None
+                color: [0.41, 0.42, 0.74, 1]
+                height: self.texture_size[1]
+                padding_y: 10            
+                
+            MDRoundFlatButton:
+                text: "Log out"
+                font_size: 12
+                pos_hint: {"center_x": 0.5, "y": 0.2}
+                on_press:
+                    root.manager.current = 'login'
+                    root.manager.transition.direction = 'left'                       
